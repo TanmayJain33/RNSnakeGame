@@ -1,14 +1,16 @@
-import React, {useRef} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, StyleSheet, Alert} from 'react-native';
 import {GameEngine} from 'react-native-game-engine';
 import Constants from './src/helpers/Constants';
 import Head from './src/components/Head/head';
 import Tail from './src/components/Tail/tail';
 import Food from './src/components/Food/food';
+import GameLoop from './src/systems/GameLoop';
 
 export default function App() {
   const BOARD_SIZE = Constants.GRID_SIZE * Constants.CELL_SIZE;
   const game_engine = useRef(null);
+  const [isGameRunning, setIsGameRunning] = useState(true);
 
   const randomPosition = (min: any, max: any) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -47,6 +49,16 @@ export default function App() {
             elements: [],
             renderer: <Tail />,
           },
+        }}
+        systems={[GameLoop]}
+        running={isGameRunning}
+        onEvent={(e: any) => {
+          switch (e) {
+            case 'game-over':
+              Alert.alert('Game Over!');
+              setIsGameRunning(false);
+              return;
+          }
         }}
       />
     </View>
