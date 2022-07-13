@@ -1,7 +1,13 @@
 import Constants from '../helpers/Constants';
 
+const randomPosition = (min: any, max: any) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 export default function (entities: any, {events, dispatch}: any) {
   const head = entities.head;
+  const food = entities.food;
+
   head.nextMove -= 1;
   if (head.nextMove === 0) {
     head.nextMove = head.updateFrequency;
@@ -15,19 +21,21 @@ export default function (entities: any, {events, dispatch}: any) {
     } else {
       head.position[0] += head.xspeed;
       head.position[1] += head.yspeed;
+      if (
+        head.position[0] == food.position[0] &&
+        head.position[1] == food.position[1]
+      ) {
+        food.position = [
+          randomPosition(0, Constants.GRID_SIZE - 1),
+          randomPosition(0, Constants.GRID_SIZE - 1),
+        ];
+      }
     }
   }
 
   return entities;
 }
 
-// import Constants from '../Constants';
-// const randomPositions = (min, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// };
-// export default function (entities, {events, dispatch}) {
-//   const head = entities.head;
-//   const food = entities.food;
 //   const tail = entities.tail;
 //   if (events.length) {
 //     events.forEach(e => {
