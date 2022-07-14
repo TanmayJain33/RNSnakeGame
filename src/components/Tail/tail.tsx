@@ -1,20 +1,10 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Constants from '../../helpers/Constants';
 
 export default function Tail({elements, size}: any) {
   const tailList = elements.map((el: any, idx: any) => (
-    <View
-      key={idx}
-      style={{
-        width: size,
-        height: size,
-        backgroundColor: '#f00',
-        position: 'absolute',
-        left: el[0] * size,
-        top: el[1] * size,
-      }}
-    />
+    <View key={idx} style={styles(el, size).tailStyles} />
   ));
   return (
     <View
@@ -26,3 +16,15 @@ export default function Tail({elements, size}: any) {
     </View>
   );
 }
+
+const styles = (el: number[], size: number) =>
+  StyleSheet.create({
+    tailStyles: {
+      width: size,
+      height: size,
+      backgroundColor: '#000',
+      position: 'absolute',
+      left: el[0] * size,
+      top: el[1] * size,
+    },
+  });
