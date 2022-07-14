@@ -13,22 +13,30 @@ export default function (entities: any, {events, dispatch}: any) {
     events.forEach((e: any) => {
       switch (e) {
         case 'move-up':
-          if (head.yspeed === 1) return;
+          if (head.yspeed === 1) {
+            return;
+          }
           head.yspeed = -1;
           head.xspeed = 0;
           return;
         case 'move-right':
-          if (head.xspeed === -1) return;
+          if (head.xspeed === -1) {
+            return;
+          }
           head.xspeed = 1;
           head.yspeed = 0;
           return;
         case 'move-down':
-          if (head.yspeed === -1) return;
+          if (head.yspeed === -1) {
+            return;
+          }
           head.yspeed = 1;
           head.xspeed = 0;
           return;
         case 'move-left':
-          if (head.xspeed === 1) return;
+          if (head.xspeed === 1) {
+            return;
+          }
           head.xspeed = -1;
           head.yspeed = 0;
           return;
@@ -51,13 +59,14 @@ export default function (entities: any, {events, dispatch}: any) {
       tail.elements.pop();
       head.position[0] += head.xspeed;
       head.position[1] += head.yspeed;
-      tail.elements.forEach((el: any, idx: any) => {
-        if (head.position[0] == el[0] && head.position[1] == el[1])
+      tail.elements.forEach((el: any) => {
+        if (head.position[0] === el[0] && head.position[1] === el[1]) {
           dispatch('game-over');
+        }
       });
       if (
-        head.position[0] == food.position[0] &&
-        head.position[1] == food.position[1]
+        head.position[0] === food.position[0] &&
+        head.position[1] === food.position[1]
       ) {
         tail.elements = [
           [head.position[0], head.position[1]],
