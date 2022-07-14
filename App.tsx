@@ -52,12 +52,7 @@ export default function App() {
     <View style={styles.canvas}>
       <GameEngine
         ref={game_engine}
-        style={{
-          flex: 0,
-          width: BOARD_SIZE,
-          height: BOARD_SIZE,
-          backgroundColor: '#fff',
-        }}
+        style={gameEngineStyles(BOARD_SIZE).gameEngineStyles}
         entities={{
           head: {
             position: [0, 0],
@@ -134,6 +129,16 @@ export default function App() {
     </View>
   );
 }
+
+const gameEngineStyles = (BOARD_SIZE: any) =>
+  StyleSheet.create({
+    gameEngineStyles: {
+      flex: 0,
+      width: BOARD_SIZE,
+      height: BOARD_SIZE,
+      backgroundColor: '#fff',
+    },
+  });
 
 const styles = StyleSheet.create({
   canvas: {
