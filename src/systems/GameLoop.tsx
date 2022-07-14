@@ -7,6 +7,7 @@ const randomPosition = (min: any, max: any) => {
 export default function (entities: any, {events, dispatch}: any) {
   const head = entities.head;
   const food = entities.food;
+  const tail = entities.tail;
 
   if (events.length) {
     events.forEach((e: any) => {
@@ -46,12 +47,22 @@ export default function (entities: any, {events, dispatch}: any) {
     ) {
       dispatch('game-over');
     } else {
+      tail.elements = [[head.position[0], head.position[1]], ...tail.elements];
+      tail.elements.pop();
       head.position[0] += head.xspeed;
       head.position[1] += head.yspeed;
+      tail.elements.forEach((el: any, idx: any) => {
+        if (head.position[0] == el[0] && head.position[1] == el[1])
+          dispatch('game-over');
+      });
       if (
         head.position[0] == food.position[0] &&
         head.position[1] == food.position[1]
       ) {
+        tail.elements = [
+          [head.position[0], head.position[1]],
+          ...tail.elements,
+        ];
         food.position = [
           randomPosition(0, Constants.GRID_SIZE - 1),
           randomPosition(0, Constants.GRID_SIZE - 1),
@@ -62,44 +73,3 @@ export default function (entities: any, {events, dispatch}: any) {
 
   return entities;
 }
-
-//   const tail = entities.tail;
-
-//   head.nextMove -= 1;
-//   if (head.nextMove === 0) {
-//     head.nextMove = head.updateFrequency;
-//     if (
-//       head.position[0] + head.xspeed < 0 ||
-//       head.position[0] + head.xspeed >= Constants.GRID_SIZE ||
-//       head.position[1] + head.yspeed < 0 ||
-//       head.position[1] + head.yspeed >= Constants.GRID_SIZE
-//     ) {
-//       dispatch('game-over');
-//     } else {
-//       tail.elements = [[head.position[0], head.position[1]], ...tail.elements];
-//       tail.elements.pop();
-//       head.position[0] += head.xspeed;
-//       head.position[1] += head.yspeed;
-//       tail.elements.forEach((el, idx) => {
-//         console.log({el, idx});
-//         if (head.position[0] === el[0] && head.position[1] === el[1])
-//           dispatch('game-over');
-//       });
-//       if (
-//         head.position[0] == food.position[0] &&
-//         head.position[1] == food.position[1]
-//       ) {
-//         tail.elements = [
-//           [head.position[0], head.position[1]],
-//           ...tail.elements,
-//         ];
-
-//         food.position = [
-//           randomPositions(0, Constants.GRID_SIZE - 1),
-//           randomPositions(0, Constants.GRID_SIZE - 1),
-//         ];
-//       }
-//     }
-//   }
-//   return entities;
-// }
