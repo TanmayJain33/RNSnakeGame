@@ -97,24 +97,32 @@ export default function App() {
         <View style={styles.controllerRow}>
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-up')}>
-            <View style={styles.controlBtn} />
+            <View style={styles.controlBtn}>
+              <Text style={styles.controlText}>Up</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles.controllerRow}>
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-left')}>
-            <View style={styles.controlBtn} />
+            <View style={styles.controlBtn}>
+              <Text style={styles.controlText}>Left</Text>
+            </View>
           </TouchableOpacity>
           <View style={[styles.controlBtn, {backgroundColor: undefined}]} />
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-right')}>
-            <View style={styles.controlBtn} />
+            <View style={styles.controlBtn}>
+              <Text style={styles.controlText}>Right</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles.controllerRow}>
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-down')}>
-            <View style={styles.controlBtn} />
+            <View style={styles.controlBtn}>
+              <Text style={styles.controlText}>Down</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -140,7 +148,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  controlBtn: {backgroundColor: '#ff0', width: 100, height: 100},
+  controlBtn: {
+    backgroundColor: '#ff0',
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  controlText: {color: '#000', fontSize: 20, fontWeight: '700'},
   text: {
     color: '#fff',
     marginTop: 15,
