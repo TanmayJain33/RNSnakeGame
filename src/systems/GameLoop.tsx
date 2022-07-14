@@ -8,6 +8,33 @@ export default function (entities: any, {events, dispatch}: any) {
   const head = entities.head;
   const food = entities.food;
 
+  if (events.length) {
+    events.forEach((e: any) => {
+      switch (e) {
+        case 'move-up':
+          if (head.yspeed === 1) return;
+          head.yspeed = -1;
+          head.xspeed = 0;
+          return;
+        case 'move-right':
+          if (head.xspeed === -1) return;
+          head.xspeed = 1;
+          head.yspeed = 0;
+          return;
+        case 'move-down':
+          if (head.yspeed === -1) return;
+          head.yspeed = 1;
+          head.xspeed = 0;
+          return;
+        case 'move-left':
+          if (head.xspeed === 1) return;
+          head.xspeed = -1;
+          head.yspeed = 0;
+          return;
+      }
+    });
+  }
+
   head.nextMove -= 1;
   if (head.nextMove === 0) {
     head.nextMove = head.updateFrequency;
@@ -37,35 +64,7 @@ export default function (entities: any, {events, dispatch}: any) {
 }
 
 //   const tail = entities.tail;
-//   if (events.length) {
-//     events.forEach(e => {
-//       switch (e) {
-//         case 'move-up':
-//           if (head.yspeed === 1) return;
-//           head.yspeed = -1;
-//           head.xspeed = 0;
-//           return;
-//         case 'move-right':
-//           if (head.xspeed === -1) return;
-//           head.xspeed = 1;
-//           head.yspeed = 0;
-//           // ToastAndroid.show("move right", ToastAndroid.SHORT);
-//           return;
-//         case 'move-down':
-//           if (head.yspeed === -1) return;
-//           // ToastAndroid.show("move down", ToastAndroid.SHORT);
-//           head.yspeed = 1;
-//           head.xspeed = 0;
-//           return;
-//         case 'move-left':
-//           if (head.xspeed === 1) return;
-//           head.xspeed = -1;
-//           head.yspeed = 0;
-//           // ToastAndroid.show("move left", ToastAndroid.SHORT);
-//           return;
-//       }
-//     });
-//   }
+
 //   head.nextMove -= 1;
 //   if (head.nextMove === 0) {
 //     head.nextMove = head.updateFrequency;
