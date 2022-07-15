@@ -6,10 +6,8 @@ React Native Game Engine includes components that allow us to add entities so th
 
 # Screenshots of the project
 
-![Simulator Screen Shot - iPhone 13 - 2022-07-15 at 09 57 08](https://user-images.githubusercontent.com/93266653/179150550-7c5b6d1f-f7f9-430c-9ecc-2c576225b5c3.png)
-
-![Simulator Screen Shot - iPhone 13 - 2022-07-15 at 09 57 45](https://user-images.githubusercontent.com/93266653/179150595-f204b324-baf8-4bd3-a75f-a77fb861fa15.png)
-
-![Simulator Screen Shot - iPhone 13 - 2022-07-15 at 09 57 32](https://user-images.githubusercontent.com/93266653/179150622-d6bc56b9-5c40-477a-a291-ed010d5407d4.png)
-
-<img src="[https://github.com/favicon.ic](https://user-images.githubusercontent.com/93266653/179150550-7c5b6d1f-f7f9-430c-9ecc-2c576225b5c3.png)o" width="100">
+<p float='left'>
+<img src="https://user-images.githubusercontent.com/93266653/179150550-7c5b6d1f-f7f9-430c-9ecc-2c576225b5c3.png" width="300" height='600'>
+<img src="https://user-images.githubusercontent.com/93266653/179150595-f204b324-baf8-4bd3-a75f-a77fb861fa15.png" width="300" height='600'>
+<img src="https://user-images.githubusercontent.com/93266653/179150622-d6bc56b9-5c40-477a-a291-ed010d5407d4.png" width="300" height='600'>
+</p>
