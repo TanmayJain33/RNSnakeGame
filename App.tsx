@@ -8,14 +8,18 @@ import Food from './src/components/Food/food';
 import GameLoop from './src/systems/GameLoop';
 
 export default function App() {
+  // Calculating the canvas/board/playing area size (15 * 15 grid)
   const BOARD_SIZE = Constants.GRID_SIZE * Constants.CELL_SIZE;
+  // GameEngine ref
   const game_engine = useRef(null);
+  // to check whther the game is running or not
   const [isGameRunning, setIsGameRunning] = useState(true);
 
+  // function to ensure randomness of food position
   const randomPosition = (min: any, max: any) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
-
+  // function for resetting the game by passing entites initial values and updating the game's running state
   const resetGame = () => {
     game_engine.current.swap({
       head: {
@@ -49,18 +53,26 @@ export default function App() {
   };
 
   return (
+    // Canvas or playing area where game objects are displayed
     <View style={styles.canvas}>
+      {/* GameEnigine component */}
       <GameEngine
         ref={game_engine}
         style={gameEngineStyles(BOARD_SIZE).gameEngineStyles}
+        // to add an entity/object, we nedd to paas it in "entities" props
         entities={{
           head: {
+            // initial position of snake's head
             position: [0, 0],
+            // size of snake's head
             size: Constants.CELL_SIZE,
+            // updateFrequency and nextMove are used to slow down the speed
             updateFrequency: 10,
             nextMove: 10,
+            // xspeed and yspeed are movement and direction
             xspeed: 0,
             yspeed: 0,
+            // renders the component
             renderer: <Head />,
           },
           food: {
@@ -73,23 +85,29 @@ export default function App() {
           },
           tail: {
             size: Constants.CELL_SIZE,
+            // empty array initially which will store tail length when snake eats the food
             elements: [],
             renderer: <Tail />,
           },
         }}
+        // to make a game loop, we need to add "systems" props which accepts array of functions
         systems={[GameLoop]}
         running={isGameRunning}
+        //used to listen to game over event
         onEvent={(e: any) => {
           switch (e) {
             case 'game-over':
               Alert.alert('Game Over!');
+              //stopping the game loop
               setIsGameRunning(false);
               return;
           }
         }}
       />
+      {/* control buttons */}
       <View style={styles.controlContainer}>
         <View style={styles.controllerRow}>
+          {/* Move Up Button */}
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-up')}>
             <View style={styles.controlBtn}>
@@ -98,6 +116,7 @@ export default function App() {
           </TouchableOpacity>
         </View>
         <View style={styles.controllerRow}>
+          {/* Move Left Button */}
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-left')}>
             <View style={styles.controlBtn}>
@@ -105,6 +124,7 @@ export default function App() {
             </View>
           </TouchableOpacity>
           <View style={[styles.controlBtn, {backgroundColor: undefined}]} />
+          {/* Move Right Button */}
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-right')}>
             <View style={styles.controlBtn}>
@@ -113,6 +133,7 @@ export default function App() {
           </TouchableOpacity>
         </View>
         <View style={styles.controllerRow}>
+          {/* Move Down Button */}
           <TouchableOpacity
             onPress={() => game_engine.current.dispatch('move-down')}>
             <View style={styles.controlBtn}>
@@ -122,6 +143,7 @@ export default function App() {
         </View>
       </View>
       {!isGameRunning && (
+        // Button for starting a new game and only appears when game is over
         <TouchableOpacity onPress={resetGame}>
           <Text style={styles.text}>Start New Game</Text>
         </TouchableOpacity>

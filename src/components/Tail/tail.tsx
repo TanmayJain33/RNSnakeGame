@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import Constants from '../../helpers/Constants';
 
 export default function Tail({elements, size}: any) {
+  // added in the tail when snake eats the food
   const tailList = elements.map((el: any, idx: any) => (
     <View key={idx} style={styles(el, size).tailStyles} />
   ));

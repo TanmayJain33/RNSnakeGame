@@ -15,6 +15,7 @@ const styles = (size: number, position: number[]) =>
       width: size,
       height: size,
       backgroundColor: '#006400',
+      // position 'absolute' so that we can easily move the head
       position: 'absolute',
       left: position[0] * size,
       top: position[1] * size,
